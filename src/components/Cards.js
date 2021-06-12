@@ -11,7 +11,7 @@ const CardButton = styled.button`
 function Cards(props) {
 
     // destructing props
-    let {setRunningCount, runningCount} = props
+    let {setRunningCount, runningCount, setDeckPen, deckPen} = props
 
     // save card count values
     let two = {name: "2", value:1}
@@ -32,13 +32,15 @@ function Cards(props) {
     let card = [two,three,four,five,six,seven,eight,nine,ten,jack,queen,king,ace]
 
     // Update running count
-    const  updateCount = function(event){
+    const  updateHandler = function(event){
         // console.log(event.target.dataset.value)
         
         let value = parseInt(event.target.dataset.value)
         let newValue = runningCount + value
         
         setRunningCount(newValue)
+        setDeckPen(deckPen+1)
+        
     }
 
     return (
@@ -46,7 +48,7 @@ function Cards(props) {
         <>
             {
                 card.map((obj, i) => 
-                    <CardButton key={i} data-value={obj.value} onClick={updateCount}> 
+                    <CardButton key={i} data-value={obj.value} onClick={updateHandler}> 
                         {obj.name} 
                     </CardButton>
                 )

@@ -11,10 +11,21 @@ function App() {
 
   // state
   const [runningCount, setrunningCount] = useState(0)
-  const [deckPen, setdeckPen] = useState(0)
   const [trueCount, setTrueCount] = useState(0)
-  const [shoeSize, setShoeSize] = useState(0)
-  
+  const [shoeSize, setShoeSize] = useState(1)
+  //Must create deckPen state LAST
+  const [deckPen, setdeckPen] = useState(0)
+
+  console.log(deckPen)  
+
+  const calcDeckPen = () => {
+    let totalCards = shoeSize * 52
+    let remainingCards = totalCards - deckPen
+    let remaingingDecks = remainingCards/52
+
+    return remaingingDecks
+  }
+
   return (
     <div className="App">
       <div>
@@ -24,14 +35,18 @@ function App() {
       <div>
         Cards
       </div>
-      <Cards setRunningCount = {setrunningCount} runningCount = {runningCount}/>
+      <Cards deckPen={deckPen} setDeckPen = {setdeckPen} setRunningCount = {setrunningCount} runningCount = {runningCount}/>
       <div>
         Running Count:
       </div>
-      <RunningCount runningCount = {runningCount}/>
+      <RunningCount  runningCount = {runningCount}/>
       <div>
         Deck Penertration
-      </div>  
+      </div>
+      <div>
+        {calcDeckPen()}
+      </div>
+      
       <div>
         True Count
       </div>
