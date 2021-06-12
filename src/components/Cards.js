@@ -29,11 +29,18 @@ function Cards() {
     let card = [two,three,four,five,six,seven,eight,nine,ten,jack,queen,king,ace]
 
     //test buttons work
-    const printValue = 
+    const  printValue = function(event){
+        console.log(event.target.dataset.value)
+    }
+
     return (
         <>
-            {card.map((obj, i) => 
-                <CardButton key={i} data-value={obj.value}> {obj.name} </CardButton>)
+            {
+                card.map((obj, i) => 
+                    <CardButton key={i} data-value={obj.value} onClick={printValue}> 
+                        {obj.name} 
+                    </CardButton>
+                )
             }
         </>
     )
