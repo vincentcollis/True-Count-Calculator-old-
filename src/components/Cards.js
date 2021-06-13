@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react';
 import styled from 'styled-components'
 
 
@@ -6,9 +6,16 @@ const CardButton = styled.button`
     background-color: green;
     margin: 5px;
 `
+const CardInputBox = styled.input`
+    border: black solid;
+    width: 25px;
+`
 
 
 function Cards(props) {
+
+    //display key pressed 
+    const [numPressed, setnumPressed] = useState("")
 
     // destructing props
     let {setRunningCount, runningCount, setUsedCards, usedCards} = props
@@ -24,10 +31,10 @@ function Cards(props) {
     let card = [one,zero,minusOne]
 
     // Update running count
-    const  updateHandlerClick = function(event){
+    const  updateHandlerClick = function(e){
         // console.log(event.target.dataset.value)
         
-        let value = parseInt(event.target.dataset.value)
+        let value = parseInt(e.target.dataset.value)
         let newValue = runningCount + value
         
         setRunningCount(newValue)
@@ -35,36 +42,52 @@ function Cards(props) {
         
     }
 
-    const handleKeyPress = (event) =>{
-        if (event.key == 'enter') {
+    const handleKeyPress = (e) => {
+        let key = e.key
+
+        function update(value){
+            let newValue = runningCount + value
             
-            console.log("test")
+            setRunningCount(newValue)
+            setUsedCards(usedCards+1)
+        }
+
+        switch (key) {
+            case "1":
+                console.log("1")
+                setnumPressed(1)
+                update(1)
+                break
+            case "2":
+                console.log("2")
+                setnumPressed(0)
+                update(0)
+                break
+            case "3":
+                console.log("3")
+                setnumPressed(-1)
+                update(-1)
+                break
+            default:
+                break;
         }
     }
+
 
     return (
         
         <>
-        <CardButton key={1} data-value={one.value} onClick={updateHandlerClick} onKeyPress={handleKeyPress}> 
-            {one.name} 
-        </CardButton>
-        
-        <CardButton key={2} data-value={zero.value} onClick={updateHandlerClick} onKeyPress={handleKeyPress}> 
-            {zero.name} 
-        </CardButton>
-        
-        <CardButton key={3} data-value={minusOne.value} onClick={updateHandlerClick} onKeyPress={handleKeyPress}> 
-            {minusOne.name} 
-        </CardButton>
-
-
-            {/* {
+             {
                 card.map((obj, i) => 
                     <CardButton key={i} data-value={obj.value} onClick={updateHandlerClick} onKeyPress={handleKeyPress}> 
                         {obj.name} 
                     </CardButton>
                 )
-            } */}
+            }
+        
+            <CardInputBox value={numPressed} onKeyPress={handleKeyPress}></CardInputBox>
+
+       
         </>
     )
 }
