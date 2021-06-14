@@ -21,14 +21,14 @@ function Cards(props) {
     let {setRunningCount, runningCount, setUsedCards, usedCards} = props
 
     // save card count values
-    let one = {name: "2-6", value:1}
+    let one = {name: "6-2", value:1}
 
-    let zero = {name: "7,8,9", value:0}
+    let zero = {name: "9,8,7", value:0}
 
-    let minusOne = {name: "10-Ace", value:-1}
+    let minusOne = {name: "Ace-10", value:-1}
 
     // save all cards to on object array
-    let card = [one,zero,minusOne]
+    let card = [minusOne,zero,one]
 
     // Update running count
     const  updateHandlerClick = function(e){
@@ -54,9 +54,9 @@ function Cards(props) {
 
         switch (key) {
             case "1":
-                console.log("1")
-                setnumPressed(1)
-                update(1)
+                console.log("3")
+                setnumPressed(-1)
+                update(-1)
                 break
             case "2":
                 console.log("2")
@@ -64,9 +64,9 @@ function Cards(props) {
                 update(0)
                 break
             case "3":
-                console.log("3")
-                setnumPressed(-1)
-                update(-1)
+                console.log("1")
+                setnumPressed(1)
+                update(1)
                 break
             default:
                 break;
